@@ -29,7 +29,7 @@ public class Main {
             			System.out.println("Id must be positive");
             			break;
             		}
-            		System.out.println("Enter name: ");
+            		System.out.print("Enter name: ");
             		String name=sc.nextLine().trim();
             		if(name.isEmpty()) {
             			System.out.println("name cannot be empty");

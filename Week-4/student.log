@@ -1,0 +1,4 @@
+Jun 27, 2025 6:16:08 PM Studentexp.StudentDAO insert
+SEVERE: inset error:Table 'studentdb.student' doesn't exist
+Jun 28, 2025 11:47:38 AM Studentexp.StudentDAO insert
+SEVERE: inset error:Duplicate entry '23' for key 'students.PRIMARY'
