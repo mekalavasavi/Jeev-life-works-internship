@@ -29,7 +29,7 @@ public class Student {
     private String address;
 
 
-    public void setName(String name) {
+    /*public void setName(String name) {
         this.name = name;
     }
 
@@ -43,7 +43,7 @@ public class Student {
 
     public void setAddress(String address) {
         this.address = address;
-    }
+    }*/
 
 
 	

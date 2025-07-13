@@ -16,19 +16,5 @@ public class StudentDTO {
 	@Pattern(regexp="^[A-D][+-]?$",message="Grade must be A+,B,C,D,E,F")
 	private String grade;
 	private String address;
-	public String getName() {
-	    return name;
-	}
-
-	public int getAge() {
-	    return age;
-	}
-
-	public String getGrade() {
-	    return grade;
-	}
-
-	public String getAddress() {
-	    return address;
-	}
+	
 }
