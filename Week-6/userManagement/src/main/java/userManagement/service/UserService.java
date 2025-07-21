@@ -8,16 +8,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- * Service to handle user-related operations.
- */
+//Service to handle user-related operations.
 @Slf4j
 @Service
 public class UserService {
 
     @Autowired
     private UserRepository repository;
-
+    // registers a new user
     public String register(User user) {
         repository.findByEmail(user.getEmail()).ifPresent(u -> {
             throw new UserAlreadyExistsException("Email already registered.");
@@ -31,12 +29,12 @@ public class UserService {
         log.info("User registered successfully: {}", user.getUsername());
         return "Registration successful";
     }
-
+    // authenticates a user by verifying username and password
     public User login(AuthRequest request) {
         return repository.findByUsernameAndPassword(request.getUsername(), request.getPassword())
                 .orElseThrow(() -> new ResourceNotFoundException("Invalid username or password"));
     }
-
+    // retrieves the profile of user
     public User getProfile(String username) {
         return repository.findByUsername(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));

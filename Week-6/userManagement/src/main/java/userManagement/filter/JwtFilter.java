@@ -1,6 +1,6 @@
-package employeeManagement.filter;
+package userManagement.filter;
 
-import employeeManagement.security.JwtUtil;
+import userManagement.security.JwtUtil;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +24,14 @@ public class JwtFilter implements Filter {
 
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
-
-        final String authHeader = req.getHeader("Authorization");
+        // url path for current request
+        String path = req.getRequestURI();
+        if (path.equals("/users/login") || path.equals("/users/register")) {
+            chain.doFilter(request, response);
+            return;
+        }
+        // get authorization token
+        String authHeader = req.getHeader("Authorization");
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
@@ -33,7 +39,7 @@ public class JwtFilter implements Filter {
             return;
         }
 
-        final String token = authHeader.substring(7);
+        String token = authHeader.substring(7);
 
         if (!jwtUtil.validateToken(token)) {
             res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
@@ -43,13 +49,10 @@ public class JwtFilter implements Filter {
 
         if (SecurityContextHolder.getContext().getAuthentication() == null) {
             String username = jwtUtil.extractUsername(token);
-
-            UsernamePasswordAuthenticationToken authToken =
+            UsernamePasswordAuthenticationToken authenticationToken =
                     new UsernamePasswordAuthenticationToken(username, null, Collections.emptyList());
-
-            authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(req));
-
-            SecurityContextHolder.getContext().setAuthentication(authToken);
+            authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(req));
+            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         }
 
         chain.doFilter(request, response);

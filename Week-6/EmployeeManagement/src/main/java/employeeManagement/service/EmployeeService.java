@@ -56,7 +56,6 @@ public class EmployeeService {
                 .collect(Collectors.toList());
     }
 
-    // ✅ Simple Java 8 Feature: Group employees by department
     public Map<String, List<Employee>> groupByDepartment() {
         List<Employee> all = getAllEmployees();
         return all.stream()

@@ -3,9 +3,6 @@ package userManagement.dto;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
-/**
- * DTO for user login.
- */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

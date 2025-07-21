@@ -8,9 +8,8 @@ import org.springframework.stereotype.Component;
 import java.security.Key;
 import java.util.Date;
 
-/**
- * Utility class for JWT generation and validation.
- */
+//Utility class for JWT generation and validation.
+
 @Component
 public class JwtUtil {
 
@@ -19,9 +18,7 @@ public class JwtUtil {
 
     private final long EXPIRATION_TIME = 1000 * 60 * 60; // 1 hour
 
-    /**
-     * Generate JWT token for username.
-     */
+    //Generate JWT token for username.
     public String generateToken(String username) {
         return Jwts.builder()
                 .setSubject(username)
@@ -32,16 +29,12 @@ public class JwtUtil {
                 .compact();
     }
 
-    /**
-     * Extract username from JWT token.
-     */
+    // Extract username from JWT token.
     public String extractUsername(String token) {
         return parseClaims(token).getSubject();
     }
 
-    /**
-     * Validate the JWT token.
-     */
+    //Validate the JWT token.
     public boolean validateToken(String token) {
         try {
             parseClaims(token);
