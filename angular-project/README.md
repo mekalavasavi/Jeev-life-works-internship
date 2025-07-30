@@ -1,59 +1,50 @@
-# AngularProject
+ **Angular Task**
+ This is a simple Angular application.it includes:
+ -**Signup Page**
+ -**Login Page**
+ -**To-Do List Page**
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.3.
+ This app uses:
+ - Reactive Forms with validation
+- Local storage for authentication simulation
+- Routing and navigation
+- Basic form error handling and styling
 
-## Development server
+  Features:
+ 1) Signup Page
+-Fields: Full Name, Email, Password
+-Validates required fields
+-Stores data in localStorage
 
-To start a local development server, run:
+2)Login Page
+-Validates credentials against saved data
+-Shows errors on invalid input
+-Navigates to To-Do page on success
 
-```bash
-ng serve
-```
+3)To-Do List Page
+-Accessible only after login (route is protected)
+-Add tasks with a form
+-Display task list
+-Delete tasks individually
+-Stores tasks in localStorage
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Prerequisites
+- [Node.js](https://nodejs.org/) (v18+ or v22 recommended)
+- Angular CLI (npm install -g @angular/cli)
 
-## Code scaffolding
+How to Run This Project:
+1. Clone the Project
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+If you’ve cloned from GitHub:
+git clone https://github.com/your-username/jeev-life-works-intership.git
+cd jeev-life-works-internship/angular-task
 
-```bash
-ng generate component component-name
-```
+2.Open in VS Code
+Go to File > Open Folder...
+Choose the angular-task folder
+Open the integrated terminal 
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Run this in the terminal:
+**npm install
+To start the server:
+**ng serve
