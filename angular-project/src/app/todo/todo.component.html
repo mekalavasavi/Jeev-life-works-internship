@@ -1,0 +1,41 @@
+<h2>To-Do List</h2>
+
+<form [formGroup]="taskForm" (ngSubmit)="addTask()">
+  <div>
+    <label>Title:</label>
+    <input type="text" formControlName="title" />
+    <div *ngIf="taskForm.get('title')?.touched && taskForm.get('title')?.invalid">
+      Title is required.
+    </div>
+  </div>
+
+  <div>
+    <label>Description:</label>
+    <input type="text" formControlName="description" />
+  </div>
+
+  <button type="submit">Add Task</button>
+</form>
+
+<hr />
+
+<h3>Pending Tasks</h3>
+<ul>
+  <li *ngFor="let task of pendingTasks; let i = index">
+    <strong>{{ task.title }}</strong> - {{ task.description }}
+    <button (click)="toggleComplete(i)">Mark Complete</button>
+    <button (click)="deleteTask(i)">Delete</button>
+  </li>
+</ul>
+
+<h3>Completed Tasks</h3>
+<ul>
+  <li *ngFor="let task of completedTasks; let i = index">
+    <s><strong>{{ task.title }}</strong> - {{ task.description }}</s>
+    <button (click)="toggleComplete(i)">Mark Incomplete</button>
+    <button (click)="deleteTask(i)">Delete</button>
+  </li>
+</ul>
+
+<hr />
+<button (click)="logout()">Logout</button>
