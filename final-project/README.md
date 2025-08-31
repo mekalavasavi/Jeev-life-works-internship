@@ -48,13 +48,6 @@ API Base URLs
 Backend API: http://localhost:8080/api/documents
 Frontend: http://localhost:4200
 
-Architecture Diagram:
-+-------------+        +----------------+        +--------+
-|   Angular   | <----> |  Spring Boot   | <----> | MySQL  |
-|  Frontend   |        |  REST API      |        | DB     |
-+-------------+        +----------------+        +--------+
-         |                      |
-         |                      |
-     Upload/Download      Store metadata + files
+
 
 
