@@ -1,0 +1,61 @@
+<h2>📂 Document List</h2>
+
+<input [(ngModel)]="searchText" placeholder="🔍 Search documents..." />
+<select [(ngModel)]="selectedCategory">
+  <option value="">All Categories</option>
+  <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+</select>
+
+<ul>
+  <li *ngFor="let doc of paginatedDocs() | filter:searchText">
+    <b>{{ doc.title }}</b> - {{ doc.description }} ({{ doc.fileName }})
+    <span> | Category: {{ doc.category }}</span>
+    <span> | Uploaded By: {{ doc.uploadedBy }}</span> 
+    <span> | Date: {{ doc.uploadDate | date:'short' }}</span> 
+    <button (click)="downloadDocument(doc.id, doc.fileName!)">Download</button>
+    <button (click)="deleteDocument(doc.id)">❌ Delete</button>
+    <button (click)="previewDocument(doc.id)">👁 Preview</button>
+    <button (click)="startEdit(doc)">Edit</button>
+  </li>
+</ul>
+
+<div *ngIf="filteredDocuments().length > pageSize" class="pagination">
+  <button (click)="prevPage()" [disabled]="currentPage === 1">⬅ Prev</button>
+  Page {{ currentPage }} / {{ totalPages() }}
+  <button (click)="nextPage()" [disabled]="currentPage === totalPages()">Next ➡</button>
+</div>
+
+<div *ngIf="editingDoc" class="edit-box">
+  <h3>✏ Edit Document</h3>
+  <form (ngSubmit)="saveEdit()">
+    <input type="text" [(ngModel)]="editData.title" name="title" placeholder="Title" required />
+    <input type="text" [(ngModel)]="editData.description" name="description" placeholder="Description" required />
+    <input type="text" [(ngModel)]="editData.category" name="category" placeholder="Category" required />
+    <input type="text" [(ngModel)]="editData.uploadedBy" name="uploadedBy" placeholder="Uploaded By" />
+
+    <button type="submit">💾 Save</button>
+    <button type="button" (click)="cancelEdit()">❌ Cancel</button>
+  </form>
+</div>
+
+<hr />
+
+<h3>➕ Upload Document (Chunked)</h3>
+<input [(ngModel)]="newDoc.title" placeholder="Title" />
+<input [(ngModel)]="newDoc.description" placeholder="Description" />
+<input [(ngModel)]="newDoc.category" placeholder="Category" />
+<input [(ngModel)]="newDoc.uploadedBy" placeholder="Uploaded By" />
+<input type="file" (change)="onFileSelected($event)" />
+<button (click)="uploadDocument()">Upload</button>
+
+<div *ngIf="uploadProgress > 0">
+  <p>Uploading... {{ uploadProgress }}%</p>
+  <progress [value]="uploadProgress" max="100"></progress>
+</div>
+
+<div *ngIf="previewUrl" class="preview-box">
+  <h3>Preview</h3>
+  <iframe [src]="previewUrl" width="100%" height="600" style="border:none"></iframe>
+  <br />
+  <button (click)="closePreview()">Close</button>
+</div>
